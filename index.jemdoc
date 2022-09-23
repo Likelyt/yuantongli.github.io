@@ -1,0 +1,83 @@
+# jemdoc: menu{MENU}{index.html}, nofooter  
+==Yuantong Li
+
+~~~
+{}{img_left}{fig/selfie.jpeg}{alt text}{131}{160}{http://directory.stat.ucla.edu/active_students/single-page/?smid=2179}
+PhD Student,\n [http://statistics.ucla.edu/ Department of Statistics], \n[http://www.kth.se University of California, Los Angeles (UCLA)]\n
+Office: BH 9410 \n
+E-mail: /yuantongli/ \[@\] ucla \[DOT\] edu \n
+Address: Boelter Hall, Los Angeles, CA 90095
+~~~
+
+
+
+
+== About me
+I’m a 4th-year Ph.D. student in the Department of Statistics, UCLA. 
+My advisor is Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng] and Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun]. 
+My research interests fall in high-dimensional statistics, 
+trustworthy AI combined with sequential decision making (bandit theory and reinforcement learning), 
+and designing and optimizing multi-agent systems. 
+Besides, I have interests and experience in natural language process field. CV is available upon request.\n
+
+Some of our current and past research interests are
+- Sequential decision making 
+- Trustworthy AI (Fairness and Causal)
+- High-dimensional statistics
+- NLP
+
+
+== Education
+- Ph.D. in Statistics, [http://statistics.ucla.edu/ UCLA], 2022 - Present.
+
+- Ph.D. in Statistics, [https://www.stat.purdue.edu/ Purdue University], 2019 - 2021.
+
+- M.S. in Statistics, [https://statistics.sciences.ncsu.edu/ North Carolina State University], 2016 - 2018.
+
+- B.S. in Mathematics, [https://www.math.harvard.edu/people/yau-shing-tung/ Shing-Tung Yau]’s Mathematics Elite Class, [http://ckc.zju.edu.cn/ckcen/ Chu Kochen Honor College], [https://www.zju.edu.cn/english/ Zhejiang University], 2012 - 2016.
+
+
+== Publications/Manuscripts 
+- {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2205.03699 Rate-Optimal Contextual Online Matching Bandit]{{</b></font>}}\n
+Y. Li, C. Wang, G. Cheng, W. Sun.\n
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2202.11474.pdf Residual Bootstrap Exploration for Stochastic Linear Bandit]{{</b></font>}}\n
+S. Wu, C. Wang, Y. Li, G. Cheng. \n
+Proceedings of the 38th International Conference on Uncertainty in Artificial Intelligence, (UAI 2022).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/abs/2205.09240 Debiasing Neural Retrieval via In-batch Balancing Regularization]{{</b></font>}}\n
+Y. Li, X. Wei, Z. Wang, S. Wang, P. Bhatia, X. Ma, and A. Arnold. \n
+Proceedings of the 4th Workshop on Gender Bias in Natural Language Processing, (GeBNLP 2022). \n
+
+- {{<font color=DarkBlue size=+0>}}[https://www.tandfonline.com/doi/abs/10.1080/01621459.2022.2096620?journalCode=uasa20 Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning]{{</b></font>}}\n
+P. Ramprasad, Y. Li, Z. Yang, Z. Wang, W. Sun., and G. Cheng.\n
+Journal of the American Statistical Association, (JASA).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btab402/6286960?redirectedFrom=fulltext Peel learning for pathway-related outcome prediction]{{</b></font>}}\n
+Y. Li, F. Wang, M. Yang, F. Yang, E. Cantu, H. Rao, and R. Feng.\n
+Bioinformatics.\n
+
+- {{<font color=DarkBlue size=+0>}}[http://proceedings.mlr.press/v130/li21a/li21a.pdf Online Forgetting Process for Linear Regression Models]{{</b></font>}}\n
+Y. Li, C. Wang, and G. Cheng.\n
+Proceedings of the 24nd International Conference on Artificial Intelligence and Statistics, (AISTATS 2021).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2006.11383.pdf A Non-Iterative Quantile Change Detection Method in Mixture Model with Heavy-Tailed Components]{{</b></font>}}\n
+Y. Li, Q. Ma, and S. K. Ghosh.\n
+The 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining 2020, (KDD 2020)\n
+
+- {{<font color=DarkBlue size=+0>}}[https://ieeexplore.ieee.org/document/9338264 Interactive Attention Networks for Semantic Text Matching]{{</b></font>}}\n
+S. Zhao, Y. Huang, C. Su, Y. Li and F. Wang.\n
+2020 IEEE International Conference on Data Mining.(ICDM 2020)\n
+
+#[publications.html Full list of publications].\n
+
+
+== Work Experiences
+- Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, June 2022 - Sep 2022 (Intern).\n
+
+- Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, May 2021 - Aug 2021 (Intern).\n
+
+== Professional Services
+- Conference Reviewer: AISTATS, Neurips
+
+- Journal Reviewer: IEEE TNNLS.
