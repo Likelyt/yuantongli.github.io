@@ -1,4 +1,4 @@
-# jemdoc: menu{MENU}{index.html}, nofooter
+# jemdoc: menu{MENU}{index.html}
 ==Yuantong Li
 
 ~~~
@@ -92,6 +92,6 @@ S. Zhao, Y. Huang, C. Su, Y. Li and F. Wang.\n
 - Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, May 2021 - Aug 2021 (Intern).\n
 
 == Professional Services
-- Conference Reviewer: AISTATS, Neurips
+- Conference reviewer/PC member: AISTATS, SDM, KDD, Neurips.
 
 - Journal Reviewer: IEEE TNNLS.
