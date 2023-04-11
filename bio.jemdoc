@@ -1,6 +1,6 @@
 # jemdoc: menu{MENU}{bio.html}
 
-== Education
+= Education
 
 - Ph.D. in Statistics, [http://statistics.ucla.edu/ UCLA], 2022 - Present.
 
@@ -12,14 +12,14 @@
 
 
 
-== Work Experiences
+= Work Experiences
 
 - Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, June 2022 - Sep 2022 (Intern).\n
 
 - Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, May 2021 - Aug 2021 (Intern).\n
 
 
-== Professional Services
+= Professional Services
 
 - Conference reviewer/PC member: AISTATS, SDM, KDD, Neurips, ICML, IJCAI, UAI.
 
