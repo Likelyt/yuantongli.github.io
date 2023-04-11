@@ -1,2 +1,4 @@
-menu
-    Home                [index.html]
+Home
+    Main                [index.html]
+    Bio                 [bio.html]
+    Publications        [publication.html] 
