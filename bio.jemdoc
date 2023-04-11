@@ -1,6 +1,6 @@
 # jemdoc: menu{MENU}{bio.html}
 
-= Education
+== Education
 
 - Ph.D. in Statistics, [http://statistics.ucla.edu/ UCLA], 2022 - Present.
 
@@ -12,14 +12,39 @@
 
 
 
-= Work Experiences
+== Work Experiences
 
 - Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, June 2022 - Sep 2022 (Intern).\n
 
 - Applied Scientist Intern, Amazon Web Service (AWS) AI Lab, May 2021 - Aug 2021 (Intern).\n
 
 
-= Professional Services
+== Invited Talk/Poster Presentation
+
+"Learning in Two-sided Matching Market"
+- International Chinese Statistical Association - Advance in Complex Data Analysis,
+    Ann Arbor, MI, June 2023.
+
+- Office of Navy Research - Causal Inference and Machine Learning Workshop,
+    Stanford University, CA, Apr 2023.
+
+- Simons Institute - Societal Considerations and Applications - Data Decision Process, 
+    University of California, Berkeley, CA, Nov 2022.
+
+- Informs Annual Meeting, Indianapolis, IN, Oct 2022.
+
+- Amazon Science Networking Event, Los Angeles, CA, Mar 2022.
+
+
+"Debiasing Neural Retrieval via In-batch balancing regularization"
+- NACCL - 4th Workshop on Gender Bias in Natural Language Processing, Seattle, WA, July 2022.
+ 
+
+"Online Forgetting Process for Linear Regression Models"
+- Health Intelligence Group, Harbin Institute of Technology, Virtual, Sep 2021.
+
+
+== Professional Services
 
 - Conference reviewer/PC member: AISTATS, SDM, KDD, Neurips, ICML, IJCAI, UAI.
 
