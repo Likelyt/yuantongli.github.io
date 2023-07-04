@@ -16,24 +16,25 @@ Address: Boelter Hall, Los Angeles, CA 90095
 
 
 == About me
-I’m a 4th-year Ph.D. student in the Department of Statistics, UCLA. 
+I'm currently a fifth-year Ph.D. candidate in the Department of Statistics at UCLA
 My advisor is Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng] and Prof. [https://www.xiaowudai.org/ Xiaowu Dai]. I was also fortunate to be advised by Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun] in Purdue University. 
-My research interests fall in high-dimensional statistics, 
-trustworthy AI combined with sequential decision making (bandit theory and reinforcement learning), 
+My research interests fall in statistical sequential decision making include bandit theory and reinforcement learning, 
 and designing and optimizing multi-agent systems. 
-Besides, I have interests and experience in natural language process field. CV is available upon request.\n
+In addition, I have a strong interest in and extensive experience applying large langauge model to enhance search, recommendation, and advertising systems.
+CV is available upon request.\n
+
 
 Some of our current and past research interests are
-- Sequential decision making 
-- Mechanism design
-- Trustworthy AI (Fairness and Causal Inference)
-- High-dimensional statistics
-- NLP
+- Sequential decision making (bandit algorithm and reinforcement learning)
+- Mechanism design (matching theory)
+- Statistical modeling
+- Trustworthy AI (fairness and causal inference)
+- Large langauge model
 
 == News
 - June 12-14th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the International Chinese Statistical Assiciation at Ann Arbor, MI.
 
-- May 26-27th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the Statistics and Optimization in Data Science Workshop, in Purdue Business School.
+- May 26-27th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the Statistics and Optimization in Data Science Workshop in Purdue Business School.
 
 - Apr 5-7th 2023, I'm going to attend the Causal Inference and Machine Learning Workshop at Stanford University to present our paper Double Matching Under Complementary Preferences.
 
