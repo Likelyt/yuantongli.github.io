@@ -3,7 +3,7 @@
 
 ~~~
 {}{img_left}{fig/selfie.jpeg}{alt text}{131}{160}{http://directory.stat.ucla.edu/active_students/single-page/?smid=2179}
-PhD Student\n
+PhD Candidate\n
 [http://statistics.ucla.edu/ Department of Statistics] \n
 [https://www.ucla.edu University of California, Los Angeles (UCLA)]\n
 Office: BH 9410 \n
@@ -17,10 +17,11 @@ Address: Boelter Hall, Los Angeles, CA 90095
 
 == About me
 I'm currently a fifth-year Ph.D. candidate in the Department of Statistics at UCLA
-My advisor is Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng] and Prof. [https://www.xiaowudai.org/ Xiaowu Dai]. I was also fortunate to be advised by Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun] in Purdue University. 
+My advisor is Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng] and Prof. [https://www.xiaowudai.org/ Xiaowu Dai]. 
+I was also fortunate to be advised by Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun] in Purdue University. 
 My research interests fall in statistical sequential decision making include bandit theory and reinforcement learning, 
 and designing and optimizing multi-agent systems. 
-In addition, I have a strong interest in and extensive experience applying large langauge model to enhance search, recommendation, and advertising systems.
+In addition, I have a strong interest in and extensive experience applying large language model to enhance search, recommendation, and advertising systems.
 CV is available upon request.\n
 
 
@@ -29,7 +30,7 @@ Some of our current and past research interests are
 - Mechanism design (matching theory)
 - Statistical modeling
 - Trustworthy AI (fairness and causal inference)
-- Large langauge model
+- Large language model
 
 == News
 - June 12-14th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the International Chinese Statistical Assiciation at Ann Arbor, MI.
