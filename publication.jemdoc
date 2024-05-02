@@ -2,19 +2,23 @@
 
 == Publications/Manuscripts 
 
+- {{<font color=DarkMagenta size=+0>}}[Dynamic Dynamic Bayesian Incentive Compatible for Recommendation In Online Two-Sided Market]{{</b></font>}}\n
+Y. Li, G. Cheng, X. Dai.\n
+
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2205.03699 Rate-Optimal Contextual Online Matching Bandit]{{</b></font>}}\n
 Y. Li, C. Wang, G. Cheng, W. Sun.\n
 
-- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2212.12158.pdf Graph Federated Learning with Hidden Representation Sharing]{{</b></font>}}\n
-S. Wu, M. Zhang, Y. Li, C. Yang, P. Li. \n
-
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2301.10230 Two-sided Competing Matching Recommendation Markets With Quota and Complementary Preferences Constraints]{{</b></font>}}\n
 Y. Li, G. Cheng, X. Dai.\n
-Proceedings of the 41th International Conference on Machine Learning (ICML), Vienna, Austria, 2024
+Proceedings of the 41th International Conference on Machine Learning, (ICML 2024).\n
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2308.07318.pdf Discussion of ``Estimating Means of Bounded Random Variables by Betting'' by Waudby-Smith and Ramdas]{{</b></font>}}\n
 J. Li, Y. Li, X. Dai.\n
-Journal of the Royal Statistical Society: Series B (Statistical Methodology), (JRSSB).\n
+Journal of the Royal Statistical Society: Series B (Statistical Methodology), (JRSSB 2023).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2212.12158.pdf Graph Federated Learning with Hidden Representation Sharing]{{</b></font>}}\n
+S. Wu, M. Zhang, Y. Li, C. Yang, P. Li. \n
+The 1st International Workshop on Federated Learning with Graph Data, (CIKM-FedGraph 2022).\n
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2202.11474.pdf Residual Bootstrap Exploration for Stochastic Linear Bandit]{{</b></font>}}\n
 S. Wu, C. Wang, Y. Li, G. Cheng. \n
@@ -22,15 +26,15 @@ Proceedings of the 38th International Conference on Uncertainty in Artificial In
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/abs/2205.09240 Debiasing Neural Retrieval via In-batch Balancing Regularization]{{</b></font>}}\n
 Y. Li, X. Wei, Z. Wang, S. Wang, P. Bhatia, X. Ma, and A. Arnold. \n
-Proceedings of the 4th Workshop on Gender Bias in Natural Language Processing, (NACCL Workship 2022). \n
+Proceedings of the 4th Workshop on Gender Bias in Natural Language Processing, (NACCL Workshop 2022). \n
 
 - {{<font color=DarkBlue size=+0>}}[https://www.tandfonline.com/doi/abs/10.1080/01621459.2022.2096620?journalCode=uasa20 Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning]{{</b></font>}}\n
 P. Ramprasad, Y. Li, Z. Yang, Z. Wang, W. Sun., and G. Cheng.\n
-Journal of the American Statistical Association, (JASA), 2022.\n
+Journal of the American Statistical Association, (JASA 2022).\n
 
 - {{<font color=DarkBlue size=+0>}}[https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btab402/6286960?redirectedFrom=fulltext Peel learning for pathway-related outcome prediction]{{</b></font>}}\n
 Y. Li, F. Wang, M. Yang, F. Yang, E. Cantu, H. Rao, and R. Feng.\n
-Bioinformatics.\n
+Bioinformatics 2021.\n
 
 - {{<font color=DarkBlue size=+0>}}[http://proceedings.mlr.press/v130/li21a/li21a.pdf Online Forgetting Process for Linear Regression Models]{{</b></font>}}\n
 Y. Li, C. Wang, and G. Cheng.\n
@@ -38,11 +42,11 @@ Proceedings of the 24nd International Conference on Artificial Intelligence and 
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2006.11383.pdf A Non-Iterative Quantile Change Detection Method in Mixture Model with Heavy-Tailed Components]{{</b></font>}}\n
 Y. Li, Q. Ma, and S. K. Ghosh.\n
-The 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining 2020, (KDD 2020)\n
+The 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining 2020, (KDD 2020).\n
 
 - {{<font color=DarkBlue size=+0>}}[https://ieeexplore.ieee.org/document/9338264 Interactive Attention Networks for Semantic Text Matching]{{</b></font>}}\n
 S. Zhao, Y. Huang, C. Su, Y. Li and F. Wang.\n
-2020 IEEE International Conference on Data Mining, (ICDM 2020)\n
+2020 IEEE International Conference on Data Mining, (ICDM 2020).\n
 
 #[publications.html Full list of publications].\n
 
