@@ -3,7 +3,6 @@
 
 ~~~
 {}{img_left}{fig/selfie.jpeg}{alt text}{131}{160}{http://directory.stat.ucla.edu/active_students/single-page/?smid=2179}
-PhD Candidate\n
 [http://statistics.ucla.edu/ Department of Statistics] \n
 [https://www.ucla.edu University of California, Los Angeles (UCLA)]\n
 Office: BH 9410 \n
@@ -16,9 +15,7 @@ Address: Boelter Hall, Los Angeles, CA 90095
 
 
 == About me
-I'm currently a fifth-year Ph.D. candidate in the Department of Statistics at UCLA
-My advisor is Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng] and Prof. [https://www.xiaowudai.org/ Xiaowu Dai]. 
-I was also fortunate to be advised by Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun] in Purdue University. 
+I got my Ph.D. degree in Statistics from UCLA and fortunate to be advised by Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng], Prof. [https://www.xiaowudai.org/ Xiaowu Dai], and Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun]. 
 My research interests fall in statistical sequential decision making include bandit theory and reinforcement learning, 
 and designing and optimizing multi-agent systems. 
 In addition, I have a strong interest in and extensive experience applying large language model to enhance search, recommendation, and advertising systems.
@@ -33,17 +30,19 @@ Some of our current and past research interests are
 - Large language model
 
 == News
+- Our ``Two-sided Competing Matching Recommendation Markets With Quota and Complementary Preferences Constraints'' got accepted by ICML 2024.
+
 - June 12-14th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the International Chinese Statistical Assiciation at Ann Arbor, MI.
 
 - May 26-27th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the Statistics and Optimization in Data Science Workshop in Purdue Business School.
 
 - Apr 5-7th 2023, I'm going to attend the Causal Inference and Machine Learning Workshop at Stanford University to present our paper Double Matching Under Complementary Preferences.
 
-- Nov 2022, I'm going to attend the Societal Considerations and Applications in Simons Institute for the Theory of Computing and to present our paper Rate-Optimal Contextual Online Matching Bandit. 
+#- Nov 2022, I'm going to attend the Societal Considerations and Applications in Simons Institute for the Theory of Computing and to present our paper Rate-Optimal Contextual Online Matching Bandit. 
 
-- Oct 2022, I will attend the Informs Annual Meeting (Indianapolis, IN) to present our paper Rate-Optimal Contextual Online Matching Bandit!
+#- Oct 2022, I will attend the Informs Annual Meeting (Indianapolis, IN) to present our paper Rate-Optimal Contextual Online Matching Bandit!
 
-- July 2022, I will attend the NACCL 2022 (Seattle, WA) to present our paper!
+#- July 2022, I will attend the NACCL 2022 (Seattle, WA) to present our paper!
 
-- June 2022, our Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning paper got accepted at JASA! Congratulations to all my collaborators! 
+#- June 2022, our Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning paper got accepted at JASA! Congratulations to all my collaborators! 
 
