@@ -1,48 +1,88 @@
 # jemdoc: menu{MENU}{index.html}
-==Yuantong Li (李沅桐)
-
 ~~~
-{}{img_left}{fig/selfie.jpeg}{alt text}{131}{160}{http://directory.stat.ucla.edu/active_students/single-page/?smid=2179}
-[http://statistics.ucla.edu/ Department of Statistics] \n
-[https://www.ucla.edu University of California, Los Angeles (UCLA)]\n
-Office: BH 9410 \n
-E-mail: /yuantongli/ \[@\] ucla \[DOT\] edu \n
-Address: Boelter Hall, Los Angeles, CA 90095
+{}{img_left}{fig/selfie1.jpeg}{alt text}{200}{280}{http://directory.stat.ucla.edu/active_students/single-page/?smid=2179}
+= Yuantong Li (李沅桐)
+
+Research Scientist\n
+Meta\n
+\n
+E-mail: /liyuantong93/ \[@\] gmail \[DOT\] com \n
 
 [https://scholar.google.com/citations?user=wT8kLn4AAAAJ&hl=en \[Google Scholar\]]
 [https://github.com/Likelyt \[Github\]]
+[https://www.linkedin.com/in/yuantongli/ \[LinkedIn\]]
+
+=== About me
+
+2024 - Now, Research Scientist at Meta.
+
+2019 - 2024, Ph.D. in Statistics at UCLA.
+
 ~~~
 
+== Research interests
 
-== About me
-I got my Ph.D. degree in Statistics from UCLA and am advised by Prof. [http://www.stat.ucla.edu/~guangcheng/2.html Guang Cheng], Prof. [https://www.xiaowudai.org/ Xiaowu Dai], and Prof. [https://web.ics.purdue.edu/~sun244/ Wei Sun]. 
-My research interests fall in statistical sequential decision making include bandit theory and reinforcement learning, 
-and designing and optimizing multi-agent systems. 
-In addition, I have a strong interest in and extensive experience applying large language model to enhance search, recommendation, and advertising systems.
-CV is available upon request.\n
+I am currently focused on developing data-efficient reinforcement learning with human feedback (RLHF) to fine-tune large language models (LLMs) for applications in search, recommendation, and advertising systems. 
+In addition, I have an extensive experience in pretraining the LLM previously at Amazon AWS AI lab and search AI.
+I'm also interested in foundational research in bandit theory and RL, and designing and optimizing multi-agent systems within the social system. 
 
+== Publications/Manuscripts
 
-Some of our current and past research interests are
-- Sequential decision making (bandit algorithm and reinforcement learning)
-- Mechanism design (matching theory)
-- Statistical modeling
-- Trustworthy AI (fairness and causal inference)
-- Large language model
+2024
 
-== News
-- Our ``Two-sided Competing Matching Recommendation Markets With Quota and Complementary Preferences Constraints'' got accepted by ICML 2024.
+- {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2406.04374 Dynamic Dynamic Bayesian Incentive Compatible for Recommendation In Online Two-Sided Market]{{</b></font>}}\n
+Y. Li, G. Cheng, X. Dai.\n
 
-- June 12-14th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the International Chinese Statistical Assiciation at Ann Arbor, MI.
+- {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2205.03699 Dynamic Matching Bandit For Two-Sided Online Markets]{{</b></font>}}\n
+Y. Li, C. Wang, G. Cheng, W. Sun.\n
 
-- May 26-27th 2023, I'm going to present our Learning in Two-Sided Matching Market work at the Statistics and Optimization in Data Science Workshop in Purdue Business School.
+- {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2301.10230 Two-sided Competing Matching Recommendation Markets With Quota and Complementary Preferences Constraints]{{</b></font>}}\n
+Y. Li, G. Cheng, X. Dai.\n
+Proceedings of the 41th International Conference on Machine Learning, (ICML 2024).\n
 
-- Apr 5-7th 2023, I'm going to attend the Causal Inference and Machine Learning Workshop at Stanford University to present our paper Double Matching Under Complementary Preferences.
+2023
 
-#- Nov 2022, I'm going to attend the Societal Considerations and Applications in Simons Institute for the Theory of Computing and to present our paper Rate-Optimal Contextual Online Matching Bandit. 
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2308.07318.pdf Discussion of ``Estimating Means of Bounded Random Variables by Betting'' by Waudby-Smith and Ramdas]{{</b></font>}}\n
+J. Li, Y. Li, X. Dai.\n
+Journal of the Royal Statistical Society: Series B (Statistical Methodology), (JRSSB 2023).\n
 
-#- Oct 2022, I will attend the Informs Annual Meeting (Indianapolis, IN) to present our paper Rate-Optimal Contextual Online Matching Bandit!
+2022
 
-#- July 2022, I will attend the NACCL 2022 (Seattle, WA) to present our paper!
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2212.12158.pdf Graph Federated Learning with Hidden Representation Sharing]{{</b></font>}}\n
+S. Wu, M. Zhang, Y. Li, C. Yang, P. Li. \n
+The 1st International Workshop on Federated Learning with Graph Data, (CIKM-FedGraph 2022).\n
 
-#- June 2022, our Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning paper got accepted at JASA! Congratulations to all my collaborators! 
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2202.11474.pdf Residual Bootstrap Exploration for Stochastic Linear Bandit]{{</b></font>}}\n
+S. Wu, C. Wang, Y. Li, G. Cheng. \n
+Proceedings of the 38th International Conference on Uncertainty in Artificial Intelligence, (UAI 2022).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/abs/2205.09240 Debiasing Neural Retrieval via In-batch Balancing Regularization]{{</b></font>}}\n
+Y. Li, X. Wei, Z. Wang, S. Wang, P. Bhatia, X. Ma, and A. Arnold. \n
+Proceedings of the 4th Workshop on Gender Bias in Natural Language Processing, (NACCL Workshop 2022). \n
+
+- {{<font color=DarkBlue size=+0>}}[https://www.tandfonline.com/doi/abs/10.1080/01621459.2022.2096620?journalCode=uasa20 Online Bootstrap Inference For Policy Evaluation in Reinforcement Learning]{{</b></font>}}\n
+P. Ramprasad, Y. Li, Z. Yang, Z. Wang, W. Sun., and G. Cheng.\n
+Journal of the American Statistical Association, (JASA 2022).\n
+
+2021
+
+- {{<font color=DarkBlue size=+0>}}[https://academic.oup.com/bioinformatics/advance-article-abstract/doi/10.1093/bioinformatics/btab402/6286960?redirectedFrom=fulltext Peel learning for pathway-related outcome prediction]{{</b></font>}}\n
+Y. Li, F. Wang, M. Yang, F. Yang, E. Cantu, H. Rao, and R. Feng.\n
+Bioinformatics 2021.\n
+
+- {{<font color=DarkBlue size=+0>}}[http://proceedings.mlr.press/v130/li21a/li21a.pdf Online Forgetting Process for Linear Regression Models]{{</b></font>}}\n
+Y. Li, C. Wang, and G. Cheng.\n
+Proceedings of the 24nd International Conference on Artificial Intelligence and Statistics, (AISTATS 2021).\n
+
+2020
+
+- {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2006.11383.pdf A Non-Iterative Quantile Change Detection Method in Mixture Model with Heavy-Tailed Components]{{</b></font>}}\n
+Y. Li, Q. Ma, and S. K. Ghosh.\n
+The 26th ACM SIGKDD Conference on Knowledge Discovery and Data Mining 2020, (KDD 2020).\n
+
+- {{<font color=DarkBlue size=+0>}}[https://ieeexplore.ieee.org/document/9338264 Interactive Attention Networks for Semantic Text Matching]{{</b></font>}}\n
+S. Zhao, Y. Huang, C. Su, Y. Li and F. Wang.\n
+2020 IEEE International Conference on Data Mining, (ICDM 2020).\n
+
+#[publications.html Full list of publications].\n
 
