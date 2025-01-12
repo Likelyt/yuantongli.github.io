@@ -30,35 +30,35 @@ I'm also interested in foundational research in bandit theory and RL, and design
 2024
 
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/pdf/2412.04484 Epinet for Content Cold Start]{{</b></font>}}\n
-Hong Jun Jeon, Songbin Liu, Yuantong Li, Hunter Song, Ji Liu, Peng Wu, Zheqing Zhu.\n
+Hong Jun Jeon, Songbin Liu, Yuantong Li, Hunter Song, Ji Liu, Peng Wu, and Zheqing Zhu.\n
 /submitted/.\n
 
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2406.04374 Dynamic Dynamic Bayesian Incentive Compatible for Recommendation In Online Two-Sided Market]{{</b></font>}}\n
-Yuantong Li, Guang Cheng, Xiaowu Dai.\n
+Yuantong Li, Guang Cheng, and Xiaowu Dai.\n
 /submitted/.\n
 
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2205.03699 Dynamic Matching Bandit For Two-Sided Online Markets]{{</b></font>}}\n
-Yuantong Li, Chi-hua Wang, Guang Cheng, Will Wei Sun.\n
+Yuantong Li, Chi-hua Wang, Guang Cheng, and Will Wei Sun.\n
 /submitted/.\n
 
 - {{<font color=DarkMagenta size=+0>}}[https://arxiv.org/abs/2301.10230 Two-sided Competing Matching Recommendation Markets With Quota and Complementary Preferences Constraints]{{</b></font>}}\n
-Yuantong Li, Guang Cheng, Xiaowu Dai.\n
+Yuantong Li, Guang Cheng, and Xiaowu Dai.\n
 /ICML 2024/.\n
 
 2023
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2308.07318.pdf Discussion of ``Estimating Means of Bounded Random Variables by Betting'' by Waudby-Smith and Ramdas]{{</b></font>}}\n
-Jiayi Li, Yuantong Li, Xiaowu Dai.\n
+Jiayi Li, Yuantong Li, and Xiaowu Dai.\n
 /JRSSB 2023/.\n
 
 2022
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2212.12158.pdf Graph Federated Learning with Hidden Representation Sharing]{{</b></font>}}\n
-Shuang Wu, Mingxuan Zhang, Yuantong Li, Carl Yang, Pan Li. \n
+Shuang Wu, Mingxuan Zhang, Yuantong Li, Carl Yang, and Pan Li. \n
 /CIKM-FedGraph 2022/.\n
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/pdf/2202.11474.pdf Residual Bootstrap Exploration for Stochastic Linear Bandit]{{</b></font>}}\n
-Shuang Wu, Chi-hua Wang, Yuantong Li, Guang Cheng. \n
+Shuang Wu, Chi-hua Wang, Yuantong Li, and Guang Cheng. \n
 /UAI 2022/.\n
 
 - {{<font color=DarkBlue size=+0>}}[https://arxiv.org/abs/2205.09240 Debiasing Neural Retrieval via In-batch Balancing Regularization]{{</b></font>}}\n
@@ -86,5 +86,5 @@ Yuantong Li, Qi Ma, and Sujit K Ghosh.\n
 /KDD 2020/.\n
 
 - {{<font color=DarkBlue size=+0>}}[https://ieeexplore.ieee.org/document/9338264 Interactive Attention Networks for Semantic Text Matching]{{</b></font>}}\n
-Sendong Zhao, Yong Huang, Chang Su, Yuantong Li and Fei Wang.\n
+Sendong Zhao, Yong Huang, Chang Su, Yuantong Li, and Fei Wang.\n
 /ICDM 2020/.\n
