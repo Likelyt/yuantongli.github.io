@@ -5,3 +5,5 @@ jemdoc *.jemdoc
 % git add .  
 % git commit -m "add ..."
 % git push -uf origin main 
+
+% https://bingtan.me/jemdocuse.html
