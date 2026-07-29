@@ -1,5 +1,8 @@
+# Build blog pages (requires .venv with markdown installed)
+.venv/bin/python build_blog.py
+
 # Build website (local jemdoc.py works with Python 3; no conda py2 env needed)
-python jemdoc.py *.jemdoc
+.venv/bin/python jemdoc.py *.jemdoc
 
 # Deploy to GitHub
 % git add .  

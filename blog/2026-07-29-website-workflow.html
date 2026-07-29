@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Website update workflow</title>
+<link rel="stylesheet" href="../jemdoc.css" type="text/css" />
+<style>
+#layout-content { max-width: 800px; margin: 2em auto; padding: 0 1em; }
+</style>
+</head>
+<body>
+<div id="layout-content">
+<p><a href="../blog.html">&larr; Back to blog</a></p>
+<p><em>2026-07-29</em></p>
+<h1>Website update workflow</h1>
+<p>A quick note on the new workflow for updating this site:</p>
+<ol>
+<li>Edit <code>.jemdoc</code> or <code>.md</code> files.</li>
+<li>Run <code>.venv/bin/python build_blog.py</code> to regenerate the blog index and posts.</li>
+<li>Run <code>.venv/bin/python jemdoc.py *.jemdoc</code> to regenerate all HTML pages.</li>
+<li>Commit and push to <code>origin main</code>.</li>
+</ol>
+<p>The site is hosted on GitHub Pages at <code>Likelyt/yuantongli.github.io</code> and served from <code>liyuantong93.com</code>.</p>
+</div>
+</body>
+</html>
