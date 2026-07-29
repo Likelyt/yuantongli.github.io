@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A case study - Steering a Language Model: Activation Vectors, SAE Features, and LoRA style</title>
+<link rel="stylesheet" href="../jemdoc.css" type="text/css" />
+<link rel="stylesheet" href="../blog.css" type="text/css" />
+</head>
+<body class="blog-post-page">
+<header class="blog-header">
+  <a href="../index.html" class="blog-logo">Yuantong Li</a>
+  <nav class="blog-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+</header>
+<main class="blog-main">
+  <p class="post-meta">2026-07-29</p>
+  <h1>A case study - Steering a Language Model: Activation Vectors, SAE Features, and LoRA style</h1>
+<p>The most useful interventions are the ones we can explain. In recommender-system fairness, this means closing a performance gap between cohorts—say, men and women—without hiding the change inside an opaque reweighting or post-processing step. In language models, it means steering a trained model toward a desired behavior without retraining billions of weights into a configuration no one can inspect. The two domains share a common question: what is the least destructive way to turn a specific behavioral dial, and how do we know what is actually being turned?</p>
+<p>The interpretability literature around language models has proposed several answers. One can add a vector to activations, discovered from contrastive examples. One can clamp a sparse-autoencoder feature to a higher value, treating the model as a dictionary of labeled concepts. Or one can learn a low-rank subspace edit, training the intervention directly on the target behavior. The methods look different—<a href="https://arxiv.org/abs/2308.10248">activation vectors</a>, <a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">sparse-autoencoder features</a>, <a href="https://arxiv.org/pdf/2404.03592">learned subspace edits</a>—but they all promise the same thing: a small, reversible intervention that changes behavior in a controlled way.</p>
+<p>That promise is hard to evaluate without a common metric. What matters is not whether a method can steer, but what it costs. Any intervention that pushes a model toward a target behavior also pushes it away from its training distribution. The question is how much.</p>
+<p>To make that cost concrete, I compared the three methods on a single behavior in GPT-2 small, measuring both steering efficacy and distribution damage on the same held-out prompts. The goal was not to crown a winner. It was to see where each method lives on the same Pareto frontier.</p>
+<p>What I found was a reminder that the field is still in the early stages of learning how to control these systems. The two least interpretable-looking methods turned out to be Pareto-equivalent. The method that felt most principled, ReFT, was not better on this task—it was worse.</p>
+<h2>Contents</h2>
+<ul>
+<li><a href="#the-steering-problem">The steering problem</a></li>
+<li><a href="#three-ways-to-turn-the-dial">Three ways to turn the dial</a></li>
+<li><a href="#the-frontier">The frontier</a></li>
+<li><a href="#what-is-the-sae-buying-you-here">What is the SAE buying you here?</a></li>
+<li><a href="#why-reft-underperformed">Why ReFT underperformed</a></li>
+<li><a href="#the-failures-that-matter">The failures that matter</a></li>
+<li><a href="#what-i-would-do-next">What I would do next</a></li>
+<li><a href="#a-small-lesson">A small lesson</a></li>
+<li><a href="#reproducibility">Reproducibility</a></li>
+<li><a href="#references-and-further-reading">References and further reading</a></li>
+<li><a href="#contrast-pairs">Contrast pairs</a></li>
+</ul>
+<h2>The steering problem</h2>
+<p>Suppose you want to make a language model produce more positive sentiment when it continues a neutral review sentence. There are many ways to do this. You can fine-tune the weights, but that changes the model everywhere and is expensive. You can prompt it, but prompts are brittle and affect context length. Or you can intervene directly on the internal activations.</p>
+<p>Activation interventions are appealing because they are small, reversible, and local. But "small" does not mean "harmless." Any intervention that pushes the model toward a target behavior also pushes it away from its training distribution. The question is how much.</p>
+<p>I measured two things on held-out neutral prompts:</p>
+<ul>
+<li><strong>Efficacy:</strong> did the model shift toward the desired continuation? I used <code>logP(" good") - logP(" bad")</code> at the final position.</li>
+<li><strong>Distribution damage:</strong> how much did the next-token distribution change overall? I used <code>KL(p_steered || p_base)</code> averaged over the next-token distribution.</li>
+</ul>
+<p>The ideal intervention sits in the top-left of this plot: high efficacy, low damage. The bad ones sit in the bottom-right: high damage, low steering. Everything else lies on a frontier.</p>
+<h2>Three ways to turn the dial</h2>
+<p>I compared three families of activation-level interventions at the same layer of GPT-2 small:</p>
+<p><strong>Activation addition</strong> is the simplest. You collect a set of positive and negative continuation prompts, take the mean difference of residual activations between the two classes, and add that vector to every position at test time, scaled by a coefficient <code>α</code>. It is a blunt instrument: a single direction in activation space, applied everywhere. But it is cheap and requires no training. (<a href="https://arxiv.org/abs/2308.10248">Turner et al. 2023 / "Activation Addition: Steering Language Models Without Optimization"</a>)</p>
+<p>Not every layer is equally steerable. The mean-diff steering vector grows with depth: its L2 norm was 2.0 at layer 6, 6.3 at layer 8, and 13.0 at layer 10. That deeper-layer amplification shows up in the sweep. At <code>α = 2.0</code>:</p>
+<p>| Layer | Efficacy | KL damage |
+|---|---|---|
+| 6 | +1.54 | 0.0035 |
+| 8 | +3.14 | 0.0818 |
+| 10 | +4.39 | 0.1412 |</p>
+<p>Layer 10 gives the strongest sentiment signal for a still-reasonable damage level, so I used it as the fixed layer for all three methods. The comparison is not between "best layer for each method"—it is between the three methods at the same depth where the behavior is most controllable.</p>
+<p><strong>SAE feature clamping</strong> is the interpretable one. I used a public sparse autoencoder trained on GPT-2 small residual activations (<code>gpt2-small-res-jb</code> via <a href="https://github.com/jbloomAus/SAELens">SAELens</a>). For the sentiment behavior, I identified feature 15438 by comparing mean feature activations on the positive and negative prompt pairs, after checking the feature's dashboard on <a href="https://www.neuronpedia.org/">Neuronpedia</a>. Then I clamped that feature to <code>α</code> times its maximum observed activation. The hope is that an SAE gives you a meaningful, human-interpretable knob: instead of pushing a random direction, you are turning a feature that <em>means</em> positive sentiment. (<a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Bricken et al. 2023 / "Towards Monosemanticity"</a>; <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">Templeton et al. 2024 / "Scaling Monosemanticity"</a>)</p>
+<p><strong>LoReFT (low-rank subspace intervention)</strong> is the learned one. I trained a small orthogonal projection and edited linear map on the same contrastive pairs using <a href="https://github.com/stanfordnlp/pyvene">pyvene</a>. ReFT does not assume a single feature or a single direction. It learns a low-rank subspace that maps base activations to a target behavior. In principle, that should make it more flexible and more generalizable across phrasings than a fixed clamp. (<a href="https://arxiv.org/pdf/2404.03592">Wu et al. 2024 / ReFT</a>)</p>
+<h2>The frontier</h2>
+<p>I swept each method across strengths and plotted efficacy against KL damage. The result was not what my prior intuition predicted.</p>
+<p>Activation addition and SAE feature clamping landed almost exactly on top of each other. At comparable strength, they achieved the same efficacy and the same low damage. For example, at <code>α = 2.0</code>:</p>
+<p>| Method | Efficacy | KL damage |
+|---|---|---|
+| Activation addition, <code>α = 2.0</code> | +4.39 | 0.141 |
+| SAE feature clamp, feature 15438, <code>α = 2.0</code> | +4.39 | 0.141 |
+| LoReFT, rank 8 | +4.41 | 1.180 |</p>
+<p>The first two are not just close. They are nearly identical on both metrics. The SAE clamp gives me a feature I can name and reason about, but it does not buy a better trade-off than the crude mean-diff vector.</p>
+<p>ReFT, meanwhile, reached similar raw efficacy but at roughly eight times the KL damage. Lower-rank configurations (rank 4 and rank 2) performed worse across random seeds. So on this small-data sentiment task, the learned subspace method was not the most efficient—it was the most damaging.</p>
+<p><img alt="Activation-addition sweep" src="/fig/llm_model_steering_layers_analysis.png" />
+<em>Efficacy versus steering strength for activation addition. The method works, and it works monotonically, but the high-strength end is where damage accumulates.</em></p>
+<p><img alt="Three-arm steering comparison" src="/fig/llm_model_steering_pareto_frontier.png" />
+<em>The Pareto frontier across the three methods. Activation addition and SAE feature clamping are essentially on the same curve. LoReFT sits to the right: similar efficacy, much higher damage.</em></p>
+<h2>What is the SAE buying you here?</h2>
+<p>This is the part of the result that makes me pause. One of the selling points of SAEs is that they give us <em>interpretable</em> levers. Feature 15438 is not just a direction; it is a sparse, identified unit whose decoder logits can be inspected. That interpretability is real and valuable if you are trying to understand why a model behaves a certain way.</p>
+<p>But interpretability is not the same as control. On this task, the SAE clamp did not give me a better controller than the mean-diff vector. The feature I selected was genuinely causal—clamping it did steer sentiment—but it was not <em>more efficient</em> than the black-box direction. The SAE told me <em>which</em> knob to turn, but it did not turn it more cleanly than a steering vector discovered by contrastive averaging.</p>
+<p>That distinction matters. If we want SAEs to guide safe interventions, we will need evidence that they improve the control frontier, not just that they provide a story about what is being changed.</p>
+<h2>Why ReFT underperformed</h2>
+<p>There are several plausible explanations, and the honest answer is that this is a small pilot with several caveats.</p>
+<p>First, ReFT was trained on only fourteen prompts (positive and neutral, all labeled toward the positive continuation). Low-rank subspace methods are data-hungry relative to feature clamps or contrastive vectors. With so few examples, ReFT may have memorized the training phrasing rather than learning a general sentiment subspace. That would explain the high variance across seeds and the higher distribution damage on held-out prompts.</p>
+<p>Second, the ReFT intervention was applied only at the last token position, whereas activation addition and the SAE clamp were applied at all positions. That is a design choice, not a fundamental limitation of the method, but it makes the comparison less symmetric. A multi-position ReFT might behave differently.</p>
+<p>Third, the behavior is narrow: a single next-token valence contrast. ReFT might shine on more complex, multi-token behaviors where a learned subspace is genuinely needed to generalize across phrasings. This experiment does not rule that out. It only says that for the simplest possible steering task, ReFT is not the best tool among the three.</p>
+<h2>The failures that matter</h2>
+<p>Most of this project's value, in my view, is in the things that did not work cleanly.</p>
+<p>Feature selection was harder than the final result suggests. I started by looking at the top features correlated with the positive/negative contrast. Most of them did not steer. Correlation is not causation, and this is the central lesson of mechanistic interpretability. I kept track of how many top-correlated features had a real causal effect, and the hit rate was low. Feature 15438 happened to work, but it was not the obvious choice from correlation alone.</p>
+<p>The top five features by mean activation difference were:</p>
+<p>| Feature idx | mean_pos | mean_neg | diff |
+|---|---:|---:|---:|
+| 8553 | 2.572 | 0.758 | +1.814 |
+| 3109 | 1.656 | 0.638 | +1.019 |
+| 15438 | 0.912 | 0.000 | +0.912 |
+| 16917 | 0.779 | 0.000 | +0.779 |
+| 19213 | 1.046 | 0.269 | +0.777 |</p>
+<p>Feature 15438 ranked third by this contrastive score. It was the one that happened to be causally steerable, while the higher-ranked features did not reliably produce the sentiment shift. That is why I think the most valuable habit in this work is to keep a "causal hit rate" column next to every correlation score.</p>
+<p>ReFT also overfit. On some seeds the training efficacy looked excellent while the held-out damage looked bad. That is a familiar pattern from production work: a method can look good on the metric you optimized and bad on the distribution you actually care about. The KL damage metric kept that honest.</p>
+<p>I also noticed the usual tokenizer artifacts. At high steering strengths, the model's behavior becomes strange not because the concept is broken, but because the probability mass is being pushed onto specific high-valence tokens. That is why I reported KL alongside perplexity and inspected generations by eye.</p>
+<h2>What I would do next</h2>
+<p>If I had ten times the compute, I would run this comparison on Gemma-2-2B with <a href="https://arxiv.org/abs/2408.05147">Gemma Scope</a> SAEs at different widths. The GPT-2 SAE I used is a useful starting point, but modern SAEs may have finer-grained feature splitting. One of the key questions is whether feature granularity changes the control frontier. If SAEs become much better at low-damage steering as the dictionary becomes larger, that would be a real argument for using them as control interfaces.</p>
+<p>I would also test cross-behavior transfer. Does a method that works well for sentiment also work well for language switching or factual completion? A method that dominates on one narrow task but fails on others is not a general control mechanism. That question is more important than the absolute ranking on any single task.</p>
+<p>Finally, I would revisit ReFT with a larger training budget and a paraphrased evaluation set. Its promise is generalization across phrasing. I would also keep an eye on newer dictionary-learning methods such as <a href="https://transformer-circuits.pub/2025/attribution-graphs/methods.html">cross-layer transcoders (CLTs)</a>, which may change the feature-granularity story again. If ReFT still loses to activation addition and SAE clamps on that test, that would be a strong result. If it wins, that would clarify where learned subspace methods belong in the toolkit.</p>
+<h2>A small lesson</h2>
+<p>There is a temptation in interpretability to treat interpretability and control as the same problem. If we can name a feature, we assume we can control it cleanly. If we can learn a subspace, we assume it generalizes better than a hand-crafted direction. This experiment suggests that those assumptions deserve independent testing.</p>
+<p>On a toy sentiment task in GPT-2 small, the two methods that look least like principled control mechanisms—a mean-diff vector and a single clamped SAE feature—were the most efficient. The learned method was not. That may change at larger scales, with richer features, or with more training data. But the point of a small controlled experiment is to surface the assumptions before scaling up, not to prove them.</p>
+<p>The broader question remains: when we want to steer a powerful model safely, what is the least destructive intervention? I do not know the answer yet. But I think the right way to find it is to keep these three approaches on the same plot, measured by the same damage metric, and let the frontier tell the story.</p>
+<h2>Reproducibility</h2>
+<p>The experiments were run on GPT-2 small with <a href="https://github.com/TransformerLensOrg/TransformerLens">TransformerLens</a>, <a href="https://github.com/jbloomAus/SAELens">SAELens</a>, and <a href="https://github.com/stanfordnlp/pyvene">pyvene</a>. I used layer 10 residual activations, fixed seeds, and saved all training configs. The exercises in <a href="https://arena-ch1-transformers.streamlit.app/">ARENA Chapter 1</a> were a useful warmup before the implementation. The metrics, figure paths, and the full notebook skeleton are in the project notes. If you want to replicate or extend the comparison, the methodology is deliberately small enough to run on a single GPU in a day or two.</p>
+<hr />
+<p><em>This post is a reflection on a small independent interpretability project. The results are preliminary, and the failures are at least as informative as the successes. If you are working on similar comparisons, I would love to hear what you are finding.</em></p>
+<h2>References and further reading</h2>
+<ol>
+<li>Anthropic, <em>So You Want to Work in Mechanistic Interpretability?</em> (April 2025 update). https://transformer-circuits.pub/2025/april-update/index.html</li>
+<li>Bricken et al., "Towards Monosemanticity: Decomposing Language Models With Dictionary Learning." <em>Transformer Circuits</em> (2023). https://transformer-circuits.pub/2023/monosemantic-features/index.html</li>
+<li>Turner, A. M., Thiergart, L., Leech, G., Udell, D., Vazquez, J. J., Mini, U., &amp; MacDiarmid, M. (2023). <em>Activation Addition: Steering Language Models Without Optimization</em> (later retitled "Steering Language Models With Activation Engineering"). https://arxiv.org/abs/2308.10248</li>
+<li>Templeton et al., "Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet." <em>Transformer Circuits</em> (2024). https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html</li>
+<li>Wu et al., "ReFT: Representation Finetuning for Language Models." https://arxiv.org/pdf/2404.03592</li>
+<li>Stanford NLP, <em>pyvene</em> library. https://github.com/stanfordnlp/pyvene</li>
+<li>Elhage et al., "Toy Models of Superposition." <em>Transformer Circuits</em> (2022). https://transformer-circuits.pub/2022/toy_model/index.html</li>
+<li>ARENA Chapter 1, <em>TransformerLens &amp; SAE tutorials</em>. https://arena-ch1-transformers.streamlit.app/</li>
+<li>Nanda, N. et al., <em>TransformerLens</em>. https://github.com/TransformerLensOrg/TransformerLens</li>
+<li>Bloom, <em>SAELens</em>. https://github.com/jbloomAus/SAELens</li>
+<li><em>Neuronpedia</em> feature dashboards. https://www.neuronpedia.org/</li>
+<li>Lieberum et al., "Gemma Scope: Open Sparse Autoencoders Everywhere All At Once on Gemma 2." https://arxiv.org/abs/2408.05147</li>
+<li>Mechanistic Interpretability Discord. https://discord.com/invite/7ZzQZzZuVY</li>
+<li>Anthropic, "Attribution Graphs: Methods and Tools." <em>Transformer Circuits</em> (2025). https://transformer-circuits.pub/2025/attribution-graphs/methods.html</li>
+<li>Olshausen &amp; Field, "Sparse coding with an overcomplete basis set: A strategy employed by V1?" <em>Vision Research</em> (1997); and the earlier 1996 technical report that introduced sparse coding as a principle.</li>
+<li>Spielman, Wang &amp; Wright, "Exact Recovery of Sparsely-Used Dictionaries." <em>COLT</em> (2012).</li>
+</ol>
+<h2>Contrast pairs</h2>
+<p>The behavior was trained and evaluated with paired sentence stems that share topic and grammar but differ only in sentiment. These are the exact prompts used to build the mean-diff steering vector, to rank SAE features, and to train the ReFT intervention.</p>
+<h3>Positive prompts (used for contrastive mean and ReFT labels)</h3>
+<ul>
+<li>I absolutely loved this movie, it was</li>
+<li>This restaurant is wonderful, the food is</li>
+<li>What a fantastic book, truly</li>
+<li>The concert last night was amazing and</li>
+<li>I'm so happy with this purchase, it's</li>
+<li>The new policy is a great success, it</li>
+<li>She gave a brilliant performance, it was</li>
+<li>Our vacation was perfect, every day was</li>
+<li>The team did an excellent job, the result is</li>
+<li>This is the best phone I've owned, it</li>
+</ul>
+<h3>Negative prompts (contrastive counterpart)</h3>
+<ul>
+<li>I absolutely hated this movie, it was</li>
+<li>This restaurant is terrible, the food is</li>
+<li>What a boring book, truly</li>
+<li>The concert last night was awful and</li>
+<li>I'm so disappointed with this purchase, it's</li>
+<li>The new policy is a total failure, it</li>
+<li>She gave a dreadful performance, it was</li>
+<li>Our vacation was miserable, every day was</li>
+<li>The team did a sloppy job, the result is</li>
+<li>This is the worst phone I've owned, it</li>
+</ul>
+<h3>Neutral evaluation prompts (held-out, for KL damage and efficacy)</h3>
+<ul>
+<li>The film we watched yesterday was</li>
+<li>The meal at the new place downtown was</li>
+<li>The presentation this morning was</li>
+<li>The weather during our trip was</li>
+<li>The software update they released is</li>
+<li>The apartment we looked at was</li>
+<li>The lecture on Tuesday was</li>
+<li>The service at the hotel was</li>
+</ul>
+<p>The positive/negative pairs were designed so that the mean-diff direction would isolate sentiment rather than topic, phrasing, or entity. The neutral prompts were chosen to be emotionally ambiguous continuations where the next token could plausibly go either way.</p>
+</main>
+</body>
+</html>
