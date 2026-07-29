@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hello, blog</title>
 <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
-<style>
-#layout-content { max-width: 800px; margin: 2em auto; padding: 0 1em; }
-</style>
+<link rel="stylesheet" href="../blog.css" type="text/css" />
 </head>
-<body>
-<div id="layout-content">
-<p><a href="../blog.html">&larr; Back to blog</a></p>
-<p><em>2026-07-28</em></p>
-<h1>Hello, blog</h1>
+<body class="blog-post-page">
+<header class="blog-header">
+  <a href="../index.html" class="blog-logo">Yuantong Li</a>
+  <nav class="blog-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+</header>
+<main class="blog-main">
+  <p class="post-meta">2026-07-28</p>
+  <h1>Hello, blog</h1>
 <p>This is the first post on the new blog section. I plan to use this space for short notes, paper updates, and thoughts on AI systems, causal inference, and sequential decision making.</p>
 <p>To add a new post, create a <code>.md</code> file in <code>blog/</code> and run:</p>
 <p><code>.venv/bin/python build_blog.py
 .venv/bin/python jemdoc.py *.jemdoc</code></p>
-</div>
+</main>
 </body>
 </html>

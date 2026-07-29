@@ -1,0 +1,237 @@
+/* Blog styles inspired by Lilian Weng's PaperMod theme.
+   Applied to blog.html and individual blog posts. */
+
+/* Use a clean system font stack and reset body for blog pages. */
+.blog-page,
+.blog-post-page {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+               Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f1f1f;
+  background: #ffffff;
+  margin: 0;
+}
+
+/* Header / navigation */
+.blog-header {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5em 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.blog-logo {
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.blog-logo:hover {
+  color: #000000;
+}
+
+.blog-nav a {
+  margin-left: 1.5em;
+  color: #6c6c6c;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.blog-nav a:hover {
+  color: #1e1e1e;
+}
+
+/* Main content area */
+.blog-main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2em 1em;
+}
+
+.blog-main h1,
+.blog-main h2,
+.blog-main h3,
+.blog-main h4 {
+  line-height: 1.2;
+  color: #1e1e1e;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+.blog-main h1 {
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+}
+
+.blog-main h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+.blog-main h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.blog-main p {
+  margin-bottom: 1.2em;
+}
+
+.blog-main a {
+  color: #1e1e1e;
+  text-decoration: underline;
+  text-decoration-color: #d1d1d1;
+}
+
+.blog-main a:hover {
+  text-decoration-color: #1e1e1e;
+}
+
+/* Intro paragraph on the blog index */
+.blog-intro {
+  color: #6c6c6c;
+  margin-bottom: 2em;
+  font-size: 1.05em;
+}
+
+/* Post list on the index page */
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-list li {
+  margin-bottom: 1.2em;
+  padding-bottom: 1.2em;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.blog-list a {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #1e1e1e;
+  text-decoration: none;
+}
+
+.blog-list a:hover {
+  text-decoration: underline;
+}
+
+.post-date {
+  color: #6c6c6c;
+  font-size: 0.9em;
+  margin-right: 0.8em;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-meta {
+  color: #6c6c6c;
+  font-size: 0.9em;
+  margin-bottom: 1em;
+}
+
+/* Code and preformatted text */
+.blog-main code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.9em;
+  background: #f5f5f5;
+  padding: 0.15em 0.3em;
+  border-radius: 4px;
+}
+
+.blog-main pre {
+  background: #f5f5f5;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 1.2em;
+}
+
+.blog-main pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Lists */
+.blog-main ul,
+.blog-main ol {
+  margin-bottom: 1.2em;
+  padding-left: 1.5em;
+}
+
+.blog-main li {
+  margin-bottom: 0.4em;
+}
+
+/* Images */
+.blog-main img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5em auto;
+}
+
+/* Blockquotes */
+.blog-main blockquote {
+  border-left: 3px solid #eeeeee;
+  padding-left: 1em;
+  margin-left: 0;
+  color: #6c6c6c;
+}
+
+/* Tables */
+.blog-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2em;
+  overflow-x: auto;
+  display: block;
+}
+
+.blog-main th,
+.blog-main td {
+  border: 1px solid #eeeeee;
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.blog-main th {
+  background: #f9f9f9;
+}
+
+/* Horizontal rule */
+.blog-main hr {
+  border: 0;
+  border-top: 1px solid #eeeeee;
+  margin: 2em 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .blog-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+  }
+
+  .blog-nav a {
+    margin-left: 0;
+    margin-right: 1.5em;
+  }
+
+  .blog-main {
+    padding: 1.5em 1em;
+  }
+
+  .blog-main h1 {
+    font-size: 1.7em;
+  }
+}

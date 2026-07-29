@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Website update workflow</title>
 <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
-<style>
-#layout-content { max-width: 800px; margin: 2em auto; padding: 0 1em; }
-</style>
+<link rel="stylesheet" href="../blog.css" type="text/css" />
 </head>
-<body>
-<div id="layout-content">
-<p><a href="../blog.html">&larr; Back to blog</a></p>
-<p><em>2026-07-29</em></p>
-<h1>Website update workflow</h1>
+<body class="blog-post-page">
+<header class="blog-header">
+  <a href="../index.html" class="blog-logo">Yuantong Li</a>
+  <nav class="blog-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+</header>
+<main class="blog-main">
+  <p class="post-meta">2026-07-29</p>
+  <h1>Website update workflow</h1>
 <p>A quick note on the new workflow for updating this site:</p>
 <ol>
 <li>Edit <code>.jemdoc</code> or <code>.md</code> files.</li>
@@ -21,6 +26,6 @@
 <li>Commit and push to <code>origin main</code>.</li>
 </ol>
 <p>The site is hosted on GitHub Pages at <code>Likelyt/yuantongli.github.io</code> and served from <code>liyuantong93.com</code>.</p>
-</div>
+</main>
 </body>
 </html>

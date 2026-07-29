@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Generate blog pages from Markdown files in blog/.
 
+This produces a blog index and individual posts in a clean, readable style
+inspired by Lilian Weng's blog (PaperMod theme).
+
 Run this before building jemdoc pages:
     .venv/bin/python build_blog.py
 """
@@ -11,32 +14,58 @@ from datetime import datetime
 import markdown
 
 BLOG_DIR = 'blog'
+
 POST_TEMPLATE = """<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <link rel="stylesheet" href="../jemdoc.css" type="text/css" />
-<style>
-#layout-content {{ max-width: 800px; margin: 2em auto; padding: 0 1em; }}
-</style>
+<link rel="stylesheet" href="../blog.css" type="text/css" />
 </head>
-<body>
-<div id="layout-content">
-<p><a href="../blog.html">&larr; Back to blog</a></p>
-<p><em>{date}</em></p>
-{content}
-</div>
+<body class="blog-post-page">
+<header class="blog-header">
+  <a href="../index.html" class="blog-logo">Yuantong Li</a>
+  <nav class="blog-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+</header>
+<main class="blog-main">
+  <p class="post-meta">{date}</p>
+  {content}
+</main>
 </body>
 </html>
 """
 
-INDEX_HEADER = """# jemdoc: menu{MENU}{blog.html}
-
-= Blog
-
-Notes, updates, and short write-ups.
-
+INDEX_TEMPLATE = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog | Yuantong Li</title>
+<link rel="stylesheet" href="jemdoc.css" type="text/css" />
+<link rel="stylesheet" href="blog.css" type="text/css" />
+</head>
+<body class="blog-page">
+<header class="blog-header">
+  <a href="index.html" class="blog-logo">Yuantong Li</a>
+  <nav class="blog-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+  </nav>
+</header>
+<main class="blog-main">
+  <h1>Blog</h1>
+  <p class="blog-intro">Notes, updates, and short write-ups.</p>
+  <ul class="blog-list">
+{posts}
+  </ul>
+</main>
+</body>
+</html>
 """
 
 
@@ -100,12 +129,15 @@ def main():
     # Sort by date descending (newest first).
     posts.sort(key=lambda x: x['date'], reverse=True)
 
-    with open('blog.jemdoc', 'w', encoding='utf-8') as f:
-        f.write(INDEX_HEADER)
-        for post in posts:
-            f.write('- [blog/{}.html {} — {}]\n'.format(
-                post['slug'], post['date'], post['title']))
-        f.write('\n')
+    list_items = []
+    for post in posts:
+        list_items.append(
+            '    <li><span class="post-date">{}</span>'
+            '<a href="blog/{}.html">{}</a></li>'.format(
+                post['date'], post['slug'], post['title']))
+
+    with open('blog.html', 'w', encoding='utf-8') as f:
+        f.write(INDEX_TEMPLATE.format(posts='\n'.join(list_items)))
 
 
 if __name__ == '__main__':
