@@ -114,11 +114,15 @@ def main():
         slug = os.path.splitext(os.path.basename(md_path))[0]
         html_path = os.path.join(BLOG_DIR, slug + '.html')
 
-        content = markdown.markdown(body)
+        content = markdown.markdown(body, extensions=['tables'])
 
         html = POST_TEMPLATE.format(title=title, date=date, content=content)
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(html)
+
+        # Hidden posts still get an HTML page, but are not listed on the index.
+        if meta.get('hidden', '').lower() in ('true', 'yes', '1'):
+            continue
 
         posts.append({
             'title': title,

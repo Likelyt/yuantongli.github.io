@@ -50,22 +50,64 @@
 <p>I compared three families of activation-level interventions at the same layer of GPT-2 small:</p>
 <p><strong>Activation addition</strong> is the simplest. You collect a set of positive and negative continuation prompts, take the mean difference of residual activations between the two classes, and add that vector to every position at test time, scaled by a coefficient <code>α</code>. It is a blunt instrument: a single direction in activation space, applied everywhere. But it is cheap and requires no training. (<a href="https://arxiv.org/abs/2308.10248">Turner et al. 2023 / "Activation Addition: Steering Language Models Without Optimization"</a>)</p>
 <p>Not every layer is equally steerable. The mean-diff steering vector grows with depth: its L2 norm was 2.0 at layer 6, 6.3 at layer 8, and 13.0 at layer 10. That deeper-layer amplification shows up in the sweep. At <code>α = 2.0</code>:</p>
-<p>| Layer | Efficacy | KL damage |
-|---|---|---|
-| 6 | +1.54 | 0.0035 |
-| 8 | +3.14 | 0.0818 |
-| 10 | +4.39 | 0.1412 |</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Efficacy</th>
+<th>KL damage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6</td>
+<td>+1.54</td>
+<td>0.0035</td>
+</tr>
+<tr>
+<td>8</td>
+<td>+3.14</td>
+<td>0.0818</td>
+</tr>
+<tr>
+<td>10</td>
+<td>+4.39</td>
+<td>0.1412</td>
+</tr>
+</tbody>
+</table>
 <p>Layer 10 gives the strongest sentiment signal for a still-reasonable damage level, so I used it as the fixed layer for all three methods. The comparison is not between "best layer for each method"—it is between the three methods at the same depth where the behavior is most controllable.</p>
 <p><strong>SAE feature clamping</strong> is the interpretable one. I used a public sparse autoencoder trained on GPT-2 small residual activations (<code>gpt2-small-res-jb</code> via <a href="https://github.com/jbloomAus/SAELens">SAELens</a>). For the sentiment behavior, I identified feature 15438 by comparing mean feature activations on the positive and negative prompt pairs, after checking the feature's dashboard on <a href="https://www.neuronpedia.org/">Neuronpedia</a>. Then I clamped that feature to <code>α</code> times its maximum observed activation. The hope is that an SAE gives you a meaningful, human-interpretable knob: instead of pushing a random direction, you are turning a feature that <em>means</em> positive sentiment. (<a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">Bricken et al. 2023 / "Towards Monosemanticity"</a>; <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">Templeton et al. 2024 / "Scaling Monosemanticity"</a>)</p>
 <p><strong>LoReFT (low-rank subspace intervention)</strong> is the learned one. I trained a small orthogonal projection and edited linear map on the same contrastive pairs using <a href="https://github.com/stanfordnlp/pyvene">pyvene</a>. ReFT does not assume a single feature or a single direction. It learns a low-rank subspace that maps base activations to a target behavior. In principle, that should make it more flexible and more generalizable across phrasings than a fixed clamp. (<a href="https://arxiv.org/pdf/2404.03592">Wu et al. 2024 / ReFT</a>)</p>
 <h2>The frontier</h2>
 <p>I swept each method across strengths and plotted efficacy against KL damage. The result was not what my prior intuition predicted.</p>
 <p>Activation addition and SAE feature clamping landed almost exactly on top of each other. At comparable strength, they achieved the same efficacy and the same low damage. For example, at <code>α = 2.0</code>:</p>
-<p>| Method | Efficacy | KL damage |
-|---|---|---|
-| Activation addition, <code>α = 2.0</code> | +4.39 | 0.141 |
-| SAE feature clamp, feature 15438, <code>α = 2.0</code> | +4.39 | 0.141 |
-| LoReFT, rank 8 | +4.41 | 1.180 |</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Efficacy</th>
+<th>KL damage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activation addition, <code>α = 2.0</code></td>
+<td>+4.39</td>
+<td>0.141</td>
+</tr>
+<tr>
+<td>SAE feature clamp, feature 15438, <code>α = 2.0</code></td>
+<td>+4.39</td>
+<td>0.141</td>
+</tr>
+<tr>
+<td>LoReFT, rank 8</td>
+<td>+4.41</td>
+<td>1.180</td>
+</tr>
+</tbody>
+</table>
 <p>The first two are not just close. They are nearly identical on both metrics. The SAE clamp gives me a feature I can name and reason about, but it does not buy a better trade-off than the crude mean-diff vector.</p>
 <p>ReFT, meanwhile, reached similar raw efficacy but at roughly eight times the KL damage. Lower-rank configurations (rank 4 and rank 2) performed worse across random seeds. So on this small-data sentiment task, the learned subspace method was not the most efficient—it was the most damaging.</p>
 <p><img alt="Activation-addition sweep" src="/fig/llm_model_steering_layers_analysis.png" />
@@ -85,13 +127,48 @@
 <p>Most of this project's value, in my view, is in the things that did not work cleanly.</p>
 <p>Feature selection was harder than the final result suggests. I started by looking at the top features correlated with the positive/negative contrast. Most of them did not steer. Correlation is not causation, and this is the central lesson of mechanistic interpretability. I kept track of how many top-correlated features had a real causal effect, and the hit rate was low. Feature 15438 happened to work, but it was not the obvious choice from correlation alone.</p>
 <p>The top five features by mean activation difference were:</p>
-<p>| Feature idx | mean_pos | mean_neg | diff |
-|---|---:|---:|---:|
-| 8553 | 2.572 | 0.758 | +1.814 |
-| 3109 | 1.656 | 0.638 | +1.019 |
-| 15438 | 0.912 | 0.000 | +0.912 |
-| 16917 | 0.779 | 0.000 | +0.779 |
-| 19213 | 1.046 | 0.269 | +0.777 |</p>
+<table>
+<thead>
+<tr>
+<th>Feature idx</th>
+<th style="text-align: right;">mean_pos</th>
+<th style="text-align: right;">mean_neg</th>
+<th style="text-align: right;">diff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8553</td>
+<td style="text-align: right;">2.572</td>
+<td style="text-align: right;">0.758</td>
+<td style="text-align: right;">+1.814</td>
+</tr>
+<tr>
+<td>3109</td>
+<td style="text-align: right;">1.656</td>
+<td style="text-align: right;">0.638</td>
+<td style="text-align: right;">+1.019</td>
+</tr>
+<tr>
+<td>15438</td>
+<td style="text-align: right;">0.912</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">+0.912</td>
+</tr>
+<tr>
+<td>16917</td>
+<td style="text-align: right;">0.779</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">+0.779</td>
+</tr>
+<tr>
+<td>19213</td>
+<td style="text-align: right;">1.046</td>
+<td style="text-align: right;">0.269</td>
+<td style="text-align: right;">+0.777</td>
+</tr>
+</tbody>
+</table>
 <p>Feature 15438 ranked third by this contrastive score. It was the one that happened to be causally steerable, while the higher-ranked features did not reliably produce the sentiment shift. That is why I think the most valuable habit in this work is to keep a "causal hit rate" column next to every correlation score.</p>
 <p>ReFT also overfit. On some seeds the training efficacy looked excellent while the held-out damage looked bad. That is a familiar pattern from production work: a method can look good on the metric you optimized and bad on the distribution you actually care about. The KL damage metric kept that honest.</p>
 <p>I also noticed the usual tokenizer artifacts. At high steering strengths, the model's behavior becomes strange not because the concept is broken, but because the probability mass is being pushed onto specific high-valence tokens. That is why I reported KL alongside perplexity and inspected generations by eye.</p>

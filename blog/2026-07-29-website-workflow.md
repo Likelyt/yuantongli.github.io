@@ -1,6 +1,7 @@
 ---
 title: Website update workflow
 date: 2026-07-29
+hidden: true
 ---
 
 # Website update workflow
