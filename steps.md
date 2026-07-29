@@ -1,9 +1,9 @@
-source ~/.bash_profile
-source activate py2
-jemdoc *.jemdoc
+# Build website (local jemdoc.py works with Python 3; no conda py2 env needed)
+python jemdoc.py *.jemdoc
 
+# Deploy to GitHub
 % git add .  
 % git commit -m "add ..."
-% git push -uf origin main 
+% git push -u origin main 
 
 % https://bingtan.me/jemdocuse.html
